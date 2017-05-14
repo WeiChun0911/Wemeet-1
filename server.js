@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({ type: 'image/*', extended: false, limit: '50mb' 
 app.use(bodyParser.json({ type: 'application/*', limit: '50mb' }));
 app.use(bodyParser.text({ type: 'text/plain' }));
 const fs = require('fs');
-const db = require('./app/lib/db.js');
+//const db = require('./app/lib/db.js');
 let connection = {};
 let onlineUser = {}; //在線用戶
 let onlineCount = 0; //在線用戶人數

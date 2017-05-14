@@ -6,7 +6,6 @@ import chat from '../lib/chat';
 import recognition from '../lib/recognition';
 import Recorder from '../lib/recorder';
 import socket from '../socket';
-import FirepadFrame from './FirepadFrame';
 
 socket.emit('id', 'ayy');
 
@@ -344,7 +343,6 @@ class Meeting extends React.Component {
                                     {agendalist}
                                 </ol>
                             </div>
-                            <FirepadFrame></FirepadFrame>
                             <input type='text' id='user_input' maxLength="25" ref='agenda_input' />
                             <button id='agenda_button' type="submit" onClick={this.onClick_addAgenda.bind(this)}>新增</button>
                         </div>

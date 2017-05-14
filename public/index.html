@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title>Wemeet－多人雲端會議系統</title>
@@ -9,11 +10,35 @@
     <link rel="stylesheet" type="text/css" href="/css/chat.css" />
     <link rel="stylesheet" type="text/css" href="/css/meet.css" />
     <link rel="stylesheet" type="text/css" href="/css/record.css">
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+    <!-- CodeMirror -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/codemirror.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/codemirror.css" />
+    <!-- Firepad -->
+    <link rel="stylesheet" href="https://cdn.firebase.com/libs/firepad/1.4.0/firepad.css" />
+    <script src="https://cdn.firebase.com/libs/firepad/1.4.0/firepad.min.js"></script>
+    <style>
+    .firepad {
+        width: 400px;
+        height: 500px;
+        background-color: #FFFF4D;
+        /* dark orange background */
+    }
+    /* Note: CodeMirror applies its own styles which can be customized in the same way.
+   To apply a background to the entire editor, we need to also apply it to CodeMirror. */
+    
+    .CodeMirror {
+        background-color: #FFFF4D;
+    }
+    </style>
 </head>
 
-<body>
+<body onload="init()">
+    <div id="firepad"></div>
     <div id="app"></div>
-    <script>(function() {
+    <script>
+    (function() {
         if (!String.prototype.trim) {
             (function() {
                 // Make sure we trim BOM and NBSP
@@ -43,9 +68,39 @@
             if (ev.target.value.trim() === '') {
                 classie.remove(ev.target.parentNode, 'input--filled');
             }
-        }})();</script>
-    <script src="/bundle.js"></script>
+        }
+    })();
+    </script>
+    <script>
+    function init() {
+        // Initialize Firebase.
+        // TODO: replace with your Firebase project configuration.
+        var config = {
+            apiKey: "AIzaSyCPYWEtQK_mMmscxsPEzPUyd0RSEPFLZ88",
+            authDomain: "wemeet-firepad.firebaseapp.com",
+            databaseURL: "https://wemeet-firepad.firebaseio.com",
+            projectId: "wemeet-firepad",
+            storageBucket: "wemeet-firepad.appspot.com",
+            messagingSenderId: "440197732368"
+        };
+        firebase.initializeApp(config);
 
+        // Get Firebase Database reference.
+        var firepadRef = firebase.database().ref();
+
+        // Create CodeMirror (with lineWrapping on).
+        var codeMirror = CodeMirror(document.getElementById('firepad'), {
+            lineWrapping: true
+        });
+
+        // Create Firepad (with rich text toolbar and shortcuts enabled).
+        var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
+            richTextShortcuts: true,
+            richTextToolbar: true
+        });
+    }
+    </script>
+    <script src="/bundle.js"></script>
 </body>
 
 </html>
