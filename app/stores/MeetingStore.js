@@ -105,8 +105,8 @@ class MeetingStore {
         this.recordState = 'recognition_detail_on';
         this.candidateQueue = {};
 
-        this.agendaState = 'nowagenda-on';
-        this.agendaImg = 'agenda-off';
+        this.agendaState = 'nowagenda-off';
+        this.agendaImg = 'agenda-on';
         this.agendaList = {};
         this.recognize = 'voice_img';
         this.voiceimg = '../img/mic.gif';
@@ -219,12 +219,12 @@ class MeetingStore {
     }
 
     changeAgendaState() {
-        if (this.agendaState == 'nowagenda-on') {
-            this.agendaState = 'nowagenda-off';
-            this.agendaImg = 'agenda-on';
-        } else {
+        if (this.agendaState == 'nowagenda-off') {
             this.agendaState = 'nowagenda-on';
             this.agendaImg = 'agenda-off';
+        } else {
+            this.agendaState = 'nowagenda-off';
+            this.agendaImg = 'agenda-on';
         }
     }
 

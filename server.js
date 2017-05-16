@@ -66,7 +66,7 @@ console.log('已啟動伺服器!');
 io.on('connection', function(socket) {
     socket.emit('newRoom', roomList);
 
-    console.log("接收到使用者: " + socket.id + " 的連線");
+    //console.log("接收到使用者: " + socket.id + " 的連線");
     // console.log(typeof(socket.id));
     // socket.on('setFakeName', function(dick) {
     //     fakeName[socket.id] = dick;

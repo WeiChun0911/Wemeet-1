@@ -41,7 +41,7 @@ class Index extends React.Component {
             <span className="input input--isao">
               <input ref='UserName' ref='Username' onKeyPress={this.handleTest.bind(this)} className="input__field input__field--isao" type="text" id="input-38" />
               <label className="input__label input__label--isao" for="input-38" data-content="請輸入你的名字">
-                <span className="input__label-content input__label-content--isao">請輸入你的名字</span>
+                <span className="input__label-content input__label-content--isao" ref="UserName">請輸入你的名字</span>
               </label>
             </span>
           </div>

@@ -9511,8 +9511,8 @@ var MeetingStore = function () {
         this.recordState = 'recognition_detail_on';
         this.candidateQueue = {};
 
-        this.agendaState = 'nowagenda-on';
-        this.agendaImg = 'agenda-off';
+        this.agendaState = 'nowagenda-off';
+        this.agendaImg = 'agenda-on';
         this.agendaList = {};
         this.recognize = 'voice_img';
         this.voiceimg = '../img/mic.gif';
@@ -9605,12 +9605,12 @@ var MeetingStore = function () {
     }, {
         key: 'changeAgendaState',
         value: function changeAgendaState() {
-            if (this.agendaState == 'nowagenda-on') {
-                this.agendaState = 'nowagenda-off';
-                this.agendaImg = 'agenda-on';
-            } else {
+            if (this.agendaState == 'nowagenda-off') {
                 this.agendaState = 'nowagenda-on';
                 this.agendaImg = 'agenda-off';
+            } else {
+                this.agendaState = 'nowagenda-off';
+                this.agendaImg = 'agenda-on';
             }
         }
     }, {
@@ -16110,7 +16110,6 @@ var ChatList = function (_React$Component) {
     }, {
         key: 'handleOnClick',
         value: function handleOnClick() {
-            event.preventDefault();
             this.roomName = this.refs.roomnum.value;
             window.location.href = 'https://140.123.175.95:8787/meeting#' + this.refs.roomnum.value;
         }
@@ -16805,7 +16804,7 @@ var Index = function (_React$Component) {
                                 { className: 'input__label input__label--isao', 'for': 'input-38', 'data-content': '\u8ACB\u8F38\u5165\u4F60\u7684\u540D\u5B57' },
                                 _react2.default.createElement(
                                     'span',
-                                    { className: 'input__label-content input__label-content--isao' },
+                                    { className: 'input__label-content input__label-content--isao', ref: 'UserName' },
                                     '\u8ACB\u8F38\u5165\u4F60\u7684\u540D\u5B57'
                                 )
                             )
@@ -17089,7 +17088,7 @@ var Meeting = function (_React$Component) {
         // this.tagList = {};
         _this.isRecording = true;
         _this.isPlaying = true;
-        _this.meetpage = window.location.href;
+        _this.meetpage = window.location;
         _this.ChatList = [];
         _this.room = window.location.hash;
         return _this;

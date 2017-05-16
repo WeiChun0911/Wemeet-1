@@ -38,7 +38,6 @@ class ChatList extends React.Component {
     }
 
     handleOnClick() {
-        event.preventDefault();
         this.roomName = this.refs.roomnum.value;
         window.location.href = 'https://140.123.175.95:8787/meeting#' + this.refs.roomnum.value;
     }

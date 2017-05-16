@@ -42,7 +42,7 @@ class Meeting extends React.Component {
         // this.tagList = {};
         this.isRecording = true;
         this.isPlaying = true;
-        this.meetpage = window.location.href;
+        this.meetpage = window.location;
         this.ChatList = [];
         this.room = window.location.hash;
     }
@@ -303,6 +303,8 @@ class Meeting extends React.Component {
         }
         if (e.keyCode == 13) {}
     }
+
+    
 
     onClick_BrainToggle() {
         MeetingActions.changeBrainstormingState();
