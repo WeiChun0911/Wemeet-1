@@ -317,12 +317,15 @@ class Meeting extends React.Component {
     }
 
     render() {
-        let agendalist = Object.keys(this.state.agendaList).map((keyName, keyIndex) => {
-            this.agendatext = keyName;
-            return (
-                <li id='agenda-li'>{this.agendatext}<button onClick={this.onClick_deleteAgenda.bind(this, this.agendatext)} id='cancel'>刪除</button></li>
-            )
-        });
+
+        //if(!this.state.agendaList){
+            let agendalist = Object.keys(this.state.agendaList).map((keyName, keyIndex) => {
+                this.agendatext = keyName;
+                return (
+                    <li id='agenda-li'>{this.agendatext}<button onClick={this.onClick_deleteAgenda.bind(this, this.agendatext)} id='cancel'>刪除</button></li>
+                )
+            });
+        //}
 
         let remoteVideo = [];
         for (let id in this.state.connections) {
@@ -356,11 +359,13 @@ class Meeting extends React.Component {
             this.state.mychattext.Text = null;
         }
 
-        let brainSuppot = this.state.ColorHat.map((value) => {
-            return (
-                <li>{value}</li>
-            );
-        });
+        //if(!this.state.ColorHat){
+            let brainSuppot = this.state.ColorHat.map((value) => {
+                return (
+                    <li>{value}</li>
+                );
+            });
+        //}
 
 
         //0514 07:39 End
