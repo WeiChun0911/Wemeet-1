@@ -1,4 +1,0 @@
-                           <div id='meet_upload'>
-                                <img id='fileicon' src='../img/upload.png' />
-                                <input id='filefake' type='file' ref='meet_fileupload' />
-                            </div>

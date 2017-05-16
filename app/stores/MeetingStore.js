@@ -156,6 +156,7 @@ class MeetingStore {
             '例如：「從過去的經驗來看，街頭宣傳對我們的品牌知名度沒有任何的效益。'
         ];
         this.systemTime = ''; //系統時間
+        //this.fakeName = {};
     }
 
     changeRecognizeState() {
@@ -174,6 +175,10 @@ class MeetingStore {
 
         }
     }
+
+    // setFakeName(obj){
+    //     this.fakeName = obj;
+    // }
 
     changeVideoState() {
         if (this.videoState == '取消視訊') {
@@ -238,6 +243,7 @@ class MeetingStore {
             delete this.remoteStreamURL[id];
         }
         delete this.connections[id];
+        //delete this.fakeName[id];
     }
 
     newParticipant(object) {

@@ -11,9 +11,8 @@ import IndexLogo from './IndexLogo';
 import FriendListStore from '../stores/FriendListStore';
 import HistoryAction from '../actions/HistoryActions';
 
+socket.emit('id');
 
-
-socket.emit('id', 'ayy');
 let configuration = {
     'iceServers': [{
         'url': 'stun:stun.l.google.com:19302'
@@ -22,13 +21,16 @@ let configuration = {
     }]
 };
 
+
 let room = window.location.hash;
+
+window.onbeforeunload = function() {
+    socket.emit('leaveRoom', room);
+};
 
 class Meeting extends React.Component {
     constructor(props) {
-        window.onbeforeunload = function() {
-            socket.emit('leaveRoom', room);
-        };
+
         super(props);
         this.state = MeetingStore.getState();
         this.onChange = this.onChange.bind(this);
@@ -44,29 +46,31 @@ class Meeting extends React.Component {
         this.ChatList = [];
         this.room = window.location.hash;
     }
-    componentWillMount() {
 
-    }
     componentDidMount() {
+        //socket.emit('getFakeName');
         MeetingStore.listen(this.onChange);
 
         //0516 更新系統時間
         MeetingActions.getSystemTime();
-        this.timer = setInterval(MeetingActions.getSystemTime,1000);
+        this.timer = setInterval(MeetingActions.getSystemTime, 1000);
+
+        // socket.on('onFakeName', (obj) => {
+        //     MeetingActions.setFakeName(obj);
+        // })
 
         //0516 更新腦力激盪
-        socket.on('OpenBrainForAll', function(agenda){
+        socket.on('OpenBrainForAll', function(agenda) {
             console.log(agenda);
             MeetingActions.changeBrainstormingState();
         });
 
-
         //0516 更新消失的議程
-        socket.on('addAgendaForAll', function(agenda){
+        socket.on('addAgendaForAll', function(agenda) {
             MeetingActions.listenAgenda(agenda);
         });
 
-        socket.on('deleteAgendaForAll', function(agenda){
+        socket.on('deleteAgendaForAll', function(agenda) {
             MeetingActions.listenAgenda(agenda);
         });
 
@@ -80,7 +84,8 @@ class Meeting extends React.Component {
             this.Chat.getUserMedia(id, room, socket);
             socket.emit('join', room);
         });
-        MeetingStore.listen(this.onChange);
+
+        
         for (let i = 0; i < this.state.langs.length; i++) {
             this.refs.select_language.options[i] = new Option(this.state.langs[i][0], i);
         }
@@ -108,7 +113,7 @@ class Meeting extends React.Component {
                     console.log('發生錯誤了看這裡: ' + e);
                 });
             //MeetingActions.addRemoteStreamURL
-            console.log(peerConn.getRemoteStreams());
+            //console.log(peerConn.getRemoteStreams());
         });
 
         socket.on('answer', (answer, sender) => {
@@ -128,7 +133,7 @@ class Meeting extends React.Component {
                     });
             } else {
                 MeetingActions.queueCandidate({ a: candidate, b: sender });
-                console.log('不!來不及加');
+                //console.log('不!來不及加');
             }
         });
 
@@ -296,17 +301,16 @@ class Meeting extends React.Component {
             //按下enter後
             this.sendText();
         }
-        if (e.keyCode == 13) {
-        }
+        if (e.keyCode == 13) {}
     }
 
     onClick_BrainToggle() {
         MeetingActions.changeBrainstormingState();
-        MeetingActions.get
+        
         socket.emit('OpenBrain', this.brainImg);
     }
 
-    onClick_changeHat(){
+    onClick_changeHat() {
         MeetingActions.RandomBrain();
     }
 

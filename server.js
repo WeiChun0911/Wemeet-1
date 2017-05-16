@@ -8,20 +8,23 @@ app.use(bodyParser.urlencoded({ type: 'image/*', extended: false, limit: '50mb' 
 app.use(bodyParser.json({ type: 'application/*', limit: '50mb' }));
 app.use(bodyParser.text({ type: 'text/plain' }));
 const fs = require('fs');
-//const db = require('./app/lib/db.js');
+const db = require('./app/lib/db.js');
 let roomList = [];
 let userInRoom = {};
 let onlineUser = {}; //在線用戶
 let onlineCount = 0; //在線用戶人數
+// let fakeName = {};
+
 
 //HTTPS參數
-// const option = {
-//     key: fs.readFileSync('./public/certificate/privatekey.pem'),
-//     cert: fs.readFileSync('./public/certificate/certificate.pem')
-// };
+
+const option = {
+    key: fs.readFileSync('./public/certificate/privatekey.pem'),
+    cert: fs.readFileSync('./public/certificate/certificate.pem')
+};
 
 //對https Server內傳入express的處理物件
-const server = require('http').createServer(app);
+const server = require('https').createServer(option, app);
 const io = require('socket.io')(server);
 server.listen(8787);
 console.log('已啟動伺服器!');
@@ -35,34 +38,43 @@ console.log('已啟動伺服器!');
 // });
 
 //資料庫「新增」部分
-app.post("/api/db/history", (req, res) => {
-    let { roomName, record } = req.body;
-    db.History.create({
-        room: roomName,
-        history: record
-    }, function(err, data) {
-        if (err) {
-            console.log(err);
-        } else {
-            res.send('新增成功^^');
-        }
+// app.post("/api/db/history", (req, res) => {
+//     let { roomName, record } = req.body;
+//     db.History.create({
+//         room: roomName,
+//         history: record
+//     }, function(err, data) {
+//         if (err) {
+//             console.log(err);
+//         } else {
+//             res.send('新增成功^^');
+//         }
+//     });
+// });
 
-    });
-});
+// app.post("/api/db/create/photo", (req, res) => {
+//     db.Account.findOneAndUpdate({ username: 'change' }, { photo: req.body.data }, (err, data) => {
+//         if (err) console.log(err);
+//         console.log('photo success');
+//     });
+// });
 
-app.post("/api/db/create/photo", (req, res) => {
-    db.Account.findOneAndUpdate({ username: 'change' }, { photo: req.body.data }, (err, data) => {
-        if (err) console.log(err);
-        console.log('photo success');
-    });
-});
+// app.post("/api/db/save/video", (req, res) => {
 
-app.post("/api/db/save/video", (req, res) => {
-
-});
+// });
 
 io.on('connection', function(socket) {
-    //console.log("接收到使用者: " + socket.id + " 的連線");
+    socket.emit('newRoom', roomList);
+
+    console.log("接收到使用者: " + socket.id + " 的連線");
+    // console.log(typeof(socket.id));
+    // socket.on('setFakeName', function(dick) {
+    //     fakeName[socket.id] = dick;
+    // })
+
+    // socket.on('getFakeName', () => {
+    //     socket.emit('onFakeName', fakeName);
+    // })
 
     //0516 Update
     socket.on('OpenBrain', function(list) {
@@ -101,7 +113,7 @@ io.on('connection', function(socket) {
         socket.emit('newRoom', roomList);
         socket.broadcast.emit('userList', userInRoom[room]);
         socket.emit('userList', userInRoom[room]);
-        console.log('廣播使用者名單囉!', userInRoom[room])
+        //console.log('廣播使用者名單囉!', userInRoom[room])
     });
 
     socket.on('leaveRoom', function(room) {
@@ -129,10 +141,6 @@ io.on('connection', function(socket) {
 
     socket.on('newParticipantA', function(msgSender, room) {
         socket.to(room).emit('newParticipantB', msgSender);
-    });
-
-    socket.on('newParticipantWithNothing', function(msgSender, room) {
-        socket.to(room).emit('newParticipantWithNothing', msgSender);
     });
 
     socket.on('offerRemotePeer', function(offer, sender, receiver) {
@@ -181,7 +189,7 @@ io.on('connection', function(socket) {
         console.log('received bye');
     });
 
-    socket.on('history', function(_history,room) {
+    socket.on('history', function(_history, room) {
         console.log(_history);
         db.History.create({
             room: room,
@@ -207,4 +215,3 @@ app.use(express.static(__dirname + '/public'));
 app.get('*', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
 });
-

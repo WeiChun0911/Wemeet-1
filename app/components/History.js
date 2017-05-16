@@ -2,6 +2,8 @@ import React from 'react';
 import HistoryStore from '../stores/HistoryStore';
 import HistoryActions from '../actions/HistoryActions';
 import socket from '../socket';
+import FriendList from './FriendList';
+import IndexLogo from './IndexLogo';
 
 let room = window.location.hash;
 class History extends React.Component {
@@ -54,15 +56,19 @@ class History extends React.Component {
             }
         );
         return (
-            <div className="box-b">
-                <div id='in'>
-                    <div id="meet_list">
-                        <table id="list">
-                            <tbody>
-                                <tr><td>會議成員：</td><td>佳怡、威君、成財、騰輝</td></tr>
-                                <tr><td>會議紀錄：</td><td>{list}</td></tr>
-                            </tbody>
-                        </table>
+            <div id='in'>
+                <IndexLogo />
+                <FriendList />
+                <div className="box-b">
+                    <div id='in'>
+                        <div id="meet_list">
+                            <table id="list">
+                                <tbody>
+                                    <tr><td>會議成員：</td><td>佳怡、威君、成財、騰輝</td></tr>
+                                    <tr><td>會議紀錄：</td><td>{list}</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

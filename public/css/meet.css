@@ -194,7 +194,7 @@ video {
   line-height: 750%;
   width: 58px;
   height: 58px;
-  margin-left: 9%;
+  margin-left: 5%;
   float: left;
   color: white;
   font-size: 11px;
@@ -341,7 +341,7 @@ video {
   BORDER-RIGHT-STYLE: none;
   BORDER-LEFT-STYLE: none;
   BORDER-BOTTOM-STYLE: none;
-  width: 78.8%;
+  width: 79.5%;
   float: left;
   height: 210%;
   outline: none;
@@ -432,7 +432,7 @@ video {
 
 #meet_main{
   width: 80%;
-  height: 580px;
+  height: 598px;
   margin-top: -0.8%;
   font-size: 12px;
   background-color: #1a0315;
@@ -442,7 +442,7 @@ video {
 #invite_detail_on {
   width: 35%;
   height: 40px;
-  margin-left: 34%;
+  margin-left: 29%;
   margin-top: -4.5%;
   position: relative;
   z-index: 502;
@@ -516,7 +516,7 @@ video {
 #invite_detail_off {
   width: 35%;
   height: 40px;
-  margin-left: 34%;
+  margin-left: 29%;
   margin-top: -4.5%;
   position: relative;
   z-index: 502;
@@ -740,8 +740,8 @@ video {
 }
 
 #user_input{
-  width: 80.9%;
-  height: 18px;
+  width: 82%;
+  height: 22px;
   float: left;
   outline: none;
 }
@@ -848,53 +848,53 @@ video {
 .arrow_box3 {
   width: 75%;
   height: 35px;
-	position: relative;
+  position: relative;
   top: 4%;
   left: 4%;
-	background: #fff;
-	word-break: break-all;
+  background: #fff;
+  word-break: break-all;
   border-radius: 4px;
 }
 
 .arrow_box3:after {
-	right: 100%;
-	top: 50%;
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
-	border-color: rgba(255, 255, 255, 0);
-	border-right-color: #fff;
-	border-width: 8px;
-	margin-top: -8px;
+  right: 100%;
+  top: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(255, 255, 255, 0);
+  border-right-color: #fff;
+  border-width: 8px;
+  margin-top: -8px;
 }
 
 .arrow_box4 {
   margin-top: 2%;
   width: 75%;
   height: 35px;
-	position: relative;
+  position: relative;
   left: 15%;
-	background: #fff;
-	word-break: break-all;
+  background: #fff;
+  word-break: break-all;
   border-radius: 4px;
 }
 
 .arrow_box4:after {
   left: 100%;
-	top: 50%;
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
-	border-color: rgba(255, 255, 255, 0);
-	border-left-color: #fff;
-	border-width: 8px;
-	margin-top: -8px;
+  top: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(255, 255, 255, 0);
+  border-left-color: #fff;
+  border-width: 8px;
+  margin-top: -8px;
 }
 
 #number-sendtime{
@@ -940,7 +940,7 @@ video {
 
 #chatbox{
   width: 100%;
-  height: 85%;
+  height:87%;
   font-size: 13px;
   background-color: #6e3667;
   overflow: scroll;
