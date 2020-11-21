@@ -10,6 +10,7 @@ import FriendList from './FriendList';
 import IndexLogo from './IndexLogo';
 import FriendListStore from '../stores/FriendListStore';
 import HistoryAction from '../actions/HistoryActions';
+import socketServerURL from '../config';
 
 socket.emit('id');
 
@@ -263,7 +264,7 @@ class Meeting extends React.Component {
         let txt;
         let r = confirm("要結束會議，並檢視會議紀錄?");
         if (r == true) {
-            window.location.href = 'https://140.123.175.95:8787/history' + room;
+            window.location.href = `${socketServerURL}/history${room}`;
         }
     }
 

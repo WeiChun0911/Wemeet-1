@@ -1,7 +1,8 @@
 import socketIO from 'socket.io-client';
+import socketServerURL from './config';
 
 let io = socketIO();
-let socket = io.connect('https://140.123.175.95.8787');
+let socket = io.connect(socketServerURL);
 
 export default socket;
 

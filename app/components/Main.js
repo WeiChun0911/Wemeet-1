@@ -3,6 +3,7 @@ import MainStore from '../stores/MainStore';
 import MainActions from '../actions/MainActions';
 import FriendList from './FriendList';
 import IndexLogo from './IndexLogo';
+import socketServerURL from '../config';
 
 class Main extends React.Component {
     constructor(props) {
@@ -27,12 +28,12 @@ class Main extends React.Component {
         e.preventDefault();
         let roomName =  this.refs.create_input.value;
         MainActions.saveName(roomName);
-        window.location = 'https://140.123.175.95:8787/meeting#' + this.refs.create_input.value;
+        window.location = `${socketServerURL}/meeting#${this.refs.create_input.value}`;
     }
 
     handleJoin(e) {
         e.preventDefault();
-        window.location = 'https://140.123.175.95:8787/meeting#' + this.refs.create_input.value;
+        window.location = `${socketServerURL}/meeting#${this.refs.create_input.value}`;
     }
 
     render() {

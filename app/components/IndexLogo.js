@@ -1,4 +1,5 @@
 import React from 'react';
+import socketServerURL from '../config';
 
 class IndexLogo extends React.Component {
   constructor(props){
@@ -8,7 +9,7 @@ class IndexLogo extends React.Component {
   render() {
     return(
         <div id="user_infro">
-            <a href='https://140.123.175.95:8787'><img id='index_img' src='/img/index_logo2.png'></img></a>
+            <a href={socketServerURL}><img id='index_img' src='/img/index_logo2.png'></img></a>
         </div> 
     );
   }

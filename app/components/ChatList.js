@@ -2,6 +2,7 @@ import React from 'react';
 import FriendListStore from '../stores/FriendListStore';
 import FriendListActions from '../actions/FriendListActions';
 import socket from '../socket';
+import socketServerURL from '../config';
 
 
 class ChatList extends React.Component {
@@ -32,14 +33,15 @@ class ChatList extends React.Component {
         if (e.charCode == 13) {
             event.preventDefault();
             this.roomName = this.refs.roomnum.value;
-            window.location.href = 'https://140.123.175.95:8787/meeting#' + this.refs.roomnum.value;
+            window.location.href = `${socketServerURL}/meeting#${this.refs.roomnum.value}`;
+            
         }
 
     }
 
     handleOnClick() {
         this.roomName = this.refs.roomnum.value;
-        window.location.href = 'https://140.123.175.95:8787/meeting#' + this.refs.roomnum.value;
+        window.location.href = `${socketServerURL}/meeting#${this.refs.roomnum.value}`;
     }
 
 
